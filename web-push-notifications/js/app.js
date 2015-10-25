@@ -1,18 +1,20 @@
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('https://jackfiallos.github.io/web-push-notifications/js/service-worker.js').then(function(){
+    navigator.serviceWorker.register('https://jackfiallos.github.io/web-push-notifications/js/service-worker.js').then(function(registration) {
         
-        console.info("El servicio se ha registrado");
+        console.info("El servicio se ha registrado", registration);
 
         // service worker ?
-        if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
+        if (!('showNotification' in serviceWorkerRegistration.prototype)) {
             console.warn('Las notificaciones no son soportadas');
             return;
         }
 
-        // Permissions check
-        if (Notification.permission === 'denied') {
-            console.warn('El usuario ha bloqueado las notificaciones');
-            return;
+        // Check the current Notification permission.  
+        // If its denied, it's a permanent block until the  
+        // user changes the permission  
+        if (Notification.permission === 'denied') {  
+            console.warn('Las notificaciones han sido bloqueadas por el usuario');  
+            return;  
         }
 
         // Push messaging supported
@@ -21,29 +23,35 @@ if ('serviceWorker' in navigator) {
             return;
         }
 
+        // We need the service worker registration to check for a subscription  
         navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-            serviceWorkerRegistration.pushManager.getSubscription().then(
-                function(subscription) {
-                    if (!subscription) {
-                        console.log(subscription);
+            // Do we already have a push message subscription?
+            serviceWorkerRegistration.pushManager.getSubscription().then(function(subscription) {
+                // We aren't subscribed to push,
+                if (!subscription) {
                     return;
-                    }
-                    else {
-                        console.log(subscription);
-                    }
                 }
-            ).catch(function(err) {
+
+                console.log(subscription);
+
+            }).catch(function(err) {
                 console.warn('Error durante getSubscription()', err);
             });
 
-            serviceWorkerRegistration.pushManager.subscribe().then(
-                function(pushSubscription) {
-                    console.log(pushSubscription);
-                }, function(error) {
-                    console.log(error);
-                }
-            ).catch(function(err) {
+            // process the permission request
+            serviceWorkerRegistration.pushManager.subscribe().then(function(subscription) {
+                console.log(subscription);
+            }).catch(function(err) {
                 console.warn('Error durante la suscription', err);
+                if (Notification.permission === 'denied') {  
+                    // The user denied the notification permission 
+                    console.warn('Permission for Notifications was denied');  
+                } else {  
+                    // A problem occurred with the subscription; common reasons  
+                    // include network errors, and lacking gcm_sender_id and/or  
+                    // gcm_user_visible_only in the manifest.  
+                    console.error('Unable to subscribe to push.', e);  
+                }
             });
         }).catch(function(err) {
             console.warn('Error durante el inicio', err);
