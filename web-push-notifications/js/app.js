@@ -25,10 +25,14 @@ if ('serviceWorker' in navigator) {
 
         // We need the service worker registration to check for a subscription  
         navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+
+            console.info("Verificando el servicio", serviceWorkerRegistration);
+
             // Do we already have a push message subscription?
             serviceWorkerRegistration.pushManager.getSubscription().then(function(subscription) {
                 // We aren't subscribed to push,
                 if (!subscription) {
+                    console.warn('No se puede suscribir');
                     return;
                 }
 
@@ -37,6 +41,23 @@ if ('serviceWorker' in navigator) {
             }).catch(function(err) {
                 console.warn('Error durante getSubscription()', err);
             });
+        }).catch(function(err) {
+            console.warn('Error durante el inicio', err);
+        });
+    }).catch(function(err) {
+        console.warn('Error durante el registro', err);
+    });
+} else {
+    console.warn('Los Service workers no están soportados en este navegador.');
+}
+
+function Subscription()
+{
+    if ('serviceWorker' in navigator) {
+        // We need the service worker registration to check for a subscription  
+        navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+
+            console.info("Solicitando permisos", serviceWorkerRegistration);
 
             // process the permission request
             serviceWorkerRegistration.pushManager.subscribe().then(function(subscription) {
@@ -56,9 +77,7 @@ if ('serviceWorker' in navigator) {
         }).catch(function(err) {
             console.warn('Error durante el inicio', err);
         });
-    }).catch(function(err) {
-        console.warn('Error durante el registro', err);
-    });
-} else {
-    console.warn('Los Service workers no están soportados en este navegador.');
+    } else {
+        console.warn('Los Service workers no están soportados en este navegador.');
+    }
 }
