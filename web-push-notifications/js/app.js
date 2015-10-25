@@ -4,7 +4,7 @@ if ('serviceWorker' in navigator) {
         console.info("El servicio se ha registrado", registration);
 
         // service worker ?
-        if (!('showNotification' in serviceWorkerRegistration.prototype)) {
+        if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
             console.warn('Las notificaciones no son soportadas');
             return;
         }
