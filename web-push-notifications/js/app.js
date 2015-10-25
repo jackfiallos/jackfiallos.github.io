@@ -1,5 +1,5 @@
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('https://jackfiallos.github.io/js/service-worker.js').then(
+    navigator.serviceWorker.register('https://jackfiallos.github.io/web-push-notifications/js/service-worker.js').then(
         function(){
             // service worker ?
             if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
