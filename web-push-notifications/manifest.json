@@ -1,7 +1,12 @@
 {
     "short_name": "NotifyTest",
     "name": "NotifyTest",
-    "gcm_sender_id": "536651336306",
-    "gcm_user_visible_only": true,
-    "permissions": [ "gcm" ]
+    "icons": [{  
+		"src": "google-logo.jpg",  
+		"sizes": "192x192",
+		"type": "image/jpg"
+	}],
+	"start_url": "https://jackfiallos.github.io/web-push-notifications/",
+	"display": "standalone",
+    "gcm_sender_id": "536651336306"
 }
