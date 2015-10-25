@@ -43,6 +43,8 @@ if ('serviceWorker' in navigator) {
             ).catch(function(err) {
                 console.warn('Error durante subscribe()', err);
             });
+        }).catch(function(err) {
+            console.warn('Error durante el registro', err);
         });
     }).catch(function(err) {
         console.warn('Error durante subscribe()', err);
