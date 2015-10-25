@@ -1,7 +1,7 @@
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('https://jackfiallos.github.io/web-push-notifications/js/service-worker.js').then(
         
-        console.info("El servicio se ha registrado");
+        console.log("El servicio se ha registrado");
 
         function(){
             // service worker ?
