@@ -1,5 +1,8 @@
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('https://jackfiallos.github.io/web-push-notifications/js/service-worker.js').then(
+        
+        console.info("El servicio se ha registrado");
+
         function(){
             // service worker ?
             if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
@@ -41,13 +44,13 @@ if ('serviceWorker' in navigator) {
                     console.log(error);
                 }
             ).catch(function(err) {
-                console.warn('Error durante subscribe()', err);
+                console.warn('Error durante la suscription', err);
             });
         }).catch(function(err) {
-            console.warn('Error durante el registro', err);
+            console.warn('Error durante el inicio', err);
         });
     }).catch(function(err) {
-        console.warn('Error durante subscribe()', err);
+        console.warn('Error durante el registro', err);
     });
 } else {
     console.warn('Los Service workers no están soportados en este navegador.');
