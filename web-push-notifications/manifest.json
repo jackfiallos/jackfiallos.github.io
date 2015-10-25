@@ -1,0 +1,7 @@
+{
+    "short_name": "NotifyTest",
+    "name": "NotifyTest",
+    "gcm_sender_id": "536651336306",
+    "gcm_user_visible_only": true,
+    "permissions": [ "gcm" ]
+}
