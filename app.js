@@ -162,11 +162,13 @@ function sendSubscriptionToServer(subscription) {
     var text = 'send/';
     var xmlhttp;
     var registrationId = endpoint.substring(endpoint.search(text)+text.length, endpoint.length);
-    var params = "id=" + registrationId;
 
     if (registrationId) {
         $.ajax({
             type: 'POST',
+            data:{
+                id:registrationId
+            },
             dataType: 'jsonp',
             crossDomain: true,
             async: false,
