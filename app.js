@@ -158,30 +158,24 @@ function unsubscribe() {
 }
 
 function sendSubscriptionToServer(subscription) {
-    console.log(subscription.endpoint);
-
     var endpoint = subscription.endpoint;
     var text = 'send/';
     var xmlhttp;
     var registrationId = endpoint.substring(endpoint.search(text)+text.length, endpoint.length);
     var params = "id=" + registrationId;
 
-    if (!registrationId) {
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                callback(xmlhttp.responseText);
+    document.domain = 'qbit.com.mx';
+
+    if (registrationId) {
+        $.ajax({
+            type: 'POST',
+            dataType: 'jsonp',
+            crossDomain: true,
+            async: false,
+            url: 'https://qbit.com.mx/push',
+            success: function (responseData) {
+                console.log(responseData);
             }
-        }
-
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.setRequestHeader("Content-length", params.length);
-        xmlhttp.setRequestHeader("Connection", "close");
-
-        xmlhttp.open('POST', 'http://qbit.com.mx/push', true);
-        xmlhttp.send(params);
-        
-        var serverResponse = xmlhttp.responseText;
-        console.log(serverResponse);
+        });
     }
 }
