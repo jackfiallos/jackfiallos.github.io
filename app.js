@@ -175,19 +175,5 @@ function sendSubscriptionToServer(subscription) {
                 console.log(responseData);
             }
         });
-
-        // xmlhttp = new XMLHttpRequest();
-
-        // xmlhttp.open('POST', 'https://qbit.com.mx/push', true);
-        // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        // xmlhttp.onreadystatechange = function() {
-        //     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        //         callback(xmlhttp.responseText);
-        //     }
-        // }
-        // xmlhttp.send(params);
-
-        // var serverResponse = xmlhttp.responseText;
-        // console.log(serverResponse);
     }
 }
