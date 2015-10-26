@@ -165,13 +165,9 @@ function sendSubscriptionToServer(subscription) {
 
     if (registrationId) {
         $.ajax({
-            type: 'POST',
-            data:{
-                id:registrationId
-            },
+            type: 'GET',
+            data:{ id:registrationId },
             dataType: 'jsonp',
-            crossDomain: true,
-            async: false,
             url: 'https://qbit.com.mx/push',
             success: function (responseData) {
                 console.log(responseData);
