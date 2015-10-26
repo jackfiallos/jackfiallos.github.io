@@ -3,7 +3,7 @@ self.addEventListener('push', function(event) {
 
     var title = 'GCM Jackfiallos';
     var body = 'Contenido breve de la notificación push';
-    var icon = 'http://leventocrm.com/levento.png';
+    var icon = '/google-logo.jpg';
     var tag = 'push tag test jack';
 
     event.waitUntil(
