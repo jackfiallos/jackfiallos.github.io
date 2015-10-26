@@ -102,6 +102,8 @@ function subscribe() {
                 pushButton.textContent = 'Enable Push Messages';  
             }  
         });  
+    }).catch(function(e) {  
+        console.error('Error', e);  
     });  
 }
 
@@ -146,6 +148,8 @@ function unsubscribe() {
         }).catch(function(e) {  
             console.error('Error thrown while unsubscribing from push messaging.', e);  
         });  
+    }).catch(function(e) {  
+        console.error('Error', e);  
     });  
 }
 
