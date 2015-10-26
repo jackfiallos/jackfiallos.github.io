@@ -167,13 +167,13 @@ function sendSubscriptionToServer(subscription) {
     if (registrationId) {
         xmlhttp = new XMLHttpRequest();
 
-        xmlhttp.open('GET', 'https://qbit.com.mx/push', true);
+        xmlhttp.open('GET', 'https://qbit.com.mx/push?' + params, true);
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 callback(xmlhttp.responseText);
             }
         }
-        xmlhttp.send(params);
+        xmlhttp.send();
 
         var serverResponse = xmlhttp.responseText;
         console.log(serverResponse);
