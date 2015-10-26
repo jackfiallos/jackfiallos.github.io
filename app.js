@@ -162,16 +162,20 @@ function sendSubscriptionToServer(subscription) {
     var text = 'send/';
     var xmlhttp;
     var registrationId = endpoint.substring(endpoint.search(text)+text.length, endpoint.length);
+    var params = "id=" + registrationId;
 
     if (registrationId) {
-        $.ajax({
-            type: 'GET',
-            data:{ id:registrationId },
-            dataType: 'jsonp',
-            url: 'https://qbit.com.mx/push',
-            success: function (responseData) {
-                console.log(responseData);
+        xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.open('GET', 'https://qbit.com.mx/push', true);
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                callback(xmlhttp.responseText);
             }
-        });
+        }
+        xmlhttp.send(params);
+
+        var serverResponse = xmlhttp.responseText;
+        console.log(serverResponse);
     }
 }
