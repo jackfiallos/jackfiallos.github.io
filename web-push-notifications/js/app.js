@@ -13,7 +13,7 @@ window.addEventListener('load', function() {
     // Check that service workers are supported, if so, progressively  
     // enhance and add push messaging support, otherwise continue without it.  
     if ('serviceWorker' in navigator) {  
-        navigator.serviceWorker.register('https://jackfiallos.github.io/web-push-notifications/js/service-worker.js').then(initialiseState);
+        navigator.serviceWorker.register('https://jackfiallos.github.io/web-push-notifications/service-worker.js').then(initialiseState);
     } else {  
         console.warn('Service workers aren\'t supported in this browser.');  
     }  
@@ -66,6 +66,8 @@ function initialiseState() {
         }).catch(function(err) {  
             console.warn('Error during getSubscription()', err);  
         });  
+    }).catch(function(e) {  
+        console.error('Error', e);  
     });  
 }
 
