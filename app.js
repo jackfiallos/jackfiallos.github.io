@@ -164,8 +164,6 @@ function sendSubscriptionToServer(subscription) {
     var registrationId = endpoint.substring(endpoint.search(text)+text.length, endpoint.length);
     var params = "id=" + registrationId;
 
-    document.domain = 'qbit.com.mx';
-
     if (registrationId) {
         $.ajax({
             type: 'POST',
